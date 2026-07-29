@@ -259,7 +259,16 @@ def attendance_summary():
     ]
     employees.sort(key=lambda r: r["name"])
 
-    return jsonify(date=target_date.isoformat(), employees=employees)
+    return jsonify(
+        date=target_date.isoformat(),
+        employees=employees,
+        _debug={
+            "prevDate": prev_date.isoformat(),
+            "targetDate": target_date.isoformat(),
+            "rawRowCount": len(rows),
+            "rosterCount": len(roster),
+        },
+    )
 
 
 if __name__ == '__main__':
